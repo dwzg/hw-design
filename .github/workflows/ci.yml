@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate the plugin and its marketplace
+        run: npx -y @anthropic-ai/claude-code@latest plugin validate .
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install (KiCad's pcbnew is not available here; tests that need it are skipped)
+        run: pip install -e ".[mcad,dev]"
+      - name: Lint
+        run: ruff check .
+      - name: Test
+        run: pytest -q
+      - name: API reference is up to date
+        run: python scripts/gen_api.py && git diff --exit-code skills/pcb-as-code/api.md
