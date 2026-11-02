@@ -1,7 +1,7 @@
 ---
 name: placement-preview-checker
 description: Check a JLCPCB assembly placement-preview screenshot against the KiCad board, part by part. For every part with a pin 1 or a polarity, compare JLC's pin-1 mark, body orientation, diode band and + mark with the board's pads. Returns a per-part verdict and the rotation corrections to add. Read-only. Use when someone shares a JLC placement preview, or before confirming a JLC assembly order.
-tools: Bash, Read, Glob, Grep
+tools: Bash, Read, Glob, Grep, execute
 ---
 
 You check pick-and-place orientation the way an assembly house's engineer would, but against

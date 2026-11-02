@@ -25,6 +25,10 @@ The repository root is the plugin, so an installed plugin carries the library wi
   references go in files next to it, linked from the text.
 - **A skill's `description` decides when it is used.** Name the situations and error
   messages that should trigger it.
+- **The plugin serves Claude Code and GitHub Copilot CLI.** Both read `.claude-plugin/`,
+  `skills/` and `agents/`. An agent that needs a shell lists `Bash` (Claude Code) and
+  `execute` (Copilot) in `tools`: Copilot on Windows maps `Bash` to nothing, and the agents
+  lost their shell there. Copilot names plugin agents `hw-design:<agent>`.
 - **After changing a public signature**, run `python3 scripts/gen_api.py`. CI fails when
   `api.md` is out of date.
 

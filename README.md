@@ -1,13 +1,13 @@
 # hw-design
 
-Electronics and mechanical design as code, for Claude Code and for people.
+Electronics and mechanical design as code, for Claude Code, GitHub Copilot CLI and people.
 
 - **A Python library, `hwdesign`.**
   - Generates KiCad schematics and boards from scripts, routes with Freerouting, cleans up
     after it, runs the layout checks DRC can't, and writes JLCPCB fab files.
   - Measures 3D-printed enclosures built in build123d.
-- **A Claude Code plugin** with skills and agents that know how to use the library, and the
-  mistakes it was built to prevent.
+- **A plugin for Claude Code and GitHub Copilot CLI** with skills and agents that know how to
+  use the library, and the mistakes it was built to prevent.
 
 It grew out of a real board-plus-housing project
 ([probe-wink](https://github.com/dwzg/probe-wink)). Every rule in the skills comes from
@@ -49,6 +49,14 @@ venv created with `--system-site-packages`.
 /plugin install hw-design@hw-design
 ```
 
+In GitHub Copilot CLI (the same manifest; agents are named `hw-design:layout-reviewer` and
+`hw-design:placement-preview-checker`):
+
+```bash
+copilot plugin marketplace add dwzg/hw-design
+copilot plugin install hw-design@hw-design
+```
+
 **The library in a project:** pin it as a submodule, so every build uses the same version:
 
 ```bash
@@ -73,7 +81,7 @@ Clone such projects with `git clone --recurse-submodules`. Or install it as a pa
 3. **`board.py`:** follow `skills/pcb-as-code/board-script.md`.
 4. **`fab.py`:** `fab.export(pcb, "build/<name>.net", "build/fab", "<name>", rot_offset)`.
 
-Ask Claude to "design a board for …" or "review this board" with the plugin installed, and
+Ask Claude or Copilot to "design a board for …" or "review this board" with the plugin installed, and
 the skills take it from there.
 
 ## Development

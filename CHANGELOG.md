@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- GitHub Copilot CLI support: agents list `execute` next to `Bash`, so they keep a shell on
+  Windows; README shows the Copilot install.
+
 ## 0.1.0
 
 First release, extracted from [probe-wink](https://github.com/dwzg/probe-wink).
